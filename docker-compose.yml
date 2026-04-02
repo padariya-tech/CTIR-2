@@ -1,0 +1,55 @@
+version: "3.9"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: ctir_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-ctir_root_pass}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-ctir_db}
+      MYSQL_USER: ${MYSQL_USER:-ctir_user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-ctir_pass}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./migrations/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-ctir_root_pass}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - ctir_net
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ctir_api
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: mysql+aiomysql://${MYSQL_USER:-ctir_user}:${MYSQL_PASSWORD:-ctir_pass}@mysql:3306/${MYSQL_DATABASE:-ctir_db}
+      THREATFOX_API_KEY: ${THREATFOX_API_KEY:-}
+      INGESTION_SCHEDULE_MINUTES: ${INGESTION_SCHEDULE_MINUTES:-60}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      API_SECRET_KEY: ${API_SECRET_KEY:-super-secret-key-change-in-prod}
+    ports:
+      - "8000:8000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    volumes:
+      - ./app:/app/app
+      - ./logs:/app/logs
+    networks:
+      - ctir_net
+
+volumes:
+  mysql_data:
+
+networks:
+  ctir_net:
+    driver: bridge
