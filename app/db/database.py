@@ -1,4 +1,4 @@
-from contextlib import asynccontextmanager
+from contextlib import asynccontextmanager  #It allows you to create an async context manager using a generator.
 from typing import AsyncGenerator
 
 from sqlalchemy.ext.asyncio import (
@@ -52,8 +52,9 @@ async def get_db() -> AsyncGenerator[AsyncSession, None]:
 
 
 @asynccontextmanager
-async def get_db_context() -> AsyncGenerator[AsyncSession, None]:
-    """Use inside services / tasks that don't go through FastAPI's DI."""
+async def get_db_context() -> AsyncGenerator[AsyncSession, None]: 
+    """Use inside services / tasks that don't go through FastAPI's DI.This function gives me a DB session and handles cleanup automatically."""
+    # AsyncSessionLocal() → creates session
     async with AsyncSessionLocal() as session:
         try:
             yield session

@@ -35,7 +35,7 @@ async def trigger_ingestion(background_tasks: BackgroundTasks):
     background_tasks.add_task(_run)
 
     try:
-        job_id = await asyncio.wait_for(asyncio.shield(future), timeout=2.0)
+        job_id = await asyncio.wait_for(asyncio.shield(future), timeout=10.0)
     except asyncio.TimeoutError:
         job_id = -1
 

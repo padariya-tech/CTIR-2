@@ -66,9 +66,9 @@ async def run_ingestion(
     t_wall = time.monotonic()
 
     # ── Create job record ─────────────────────────────────────────────────────
-    async with get_db_context() as session:
-        feed_id = await _resolve_feed_id(session, feed_name)
-        job_repo = IngestionJobRepository(session)
+    async with get_db_context() as session: # Get a DB session for job record creation
+        feed_id = await _resolve_feed_id(session, feed_name) # Look up feed_id from DB using feed_name
+        job_repo = IngestionJobRepository(session) # Create a repository instance for managing ingestion jobs
         job = await job_repo.create(feed_id=feed_id, triggered_by=triggered_by)
         job_id = job.id
 
@@ -80,7 +80,7 @@ async def run_ingestion(
         settings = get_settings()
 
         # ── Step 1: Fetch ─────────────────────────────────────────────────────
-        connector = get_connector(feed_name)
+        connector = get_connector(feed_name) 
         try:
             async with connector as conn:
                 raw_records, fetch_metrics = await conn.fetch_recent(

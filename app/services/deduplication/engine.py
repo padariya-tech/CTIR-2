@@ -40,6 +40,13 @@ def _merge_severity(existing: str, incoming: str) -> str:
         else incoming
     )
 
+def _to_utc(dt):
+    """Ensure datetime is timezone-aware (UTC)."""
+    if dt is None:
+        return None
+    if dt.tzinfo is None:
+        return dt.replace(tzinfo=timezone.utc)
+    return dt
 
 class DeduplicationEngine:
     def __init__(self, session: AsyncSession, feed_id: int) -> None:
@@ -116,6 +123,9 @@ class DeduplicationEngine:
                 )
                 existing = result.scalar_one()
 
+        # ── Normalize datetimes (FIX) ───────────────────────────────
+        incoming_last_seen = _to_utc(ioc.last_seen_at)
+        existing_last_seen = _to_utc(existing.last_seen_at)
         # ── Duplicate detected / recovered ────────────────────────
         changed = False
 
@@ -131,8 +141,8 @@ class DeduplicationEngine:
             changed = True
 
         # Update last_seen
-        if ioc.last_seen_at > existing.last_seen_at:
-            existing.last_seen_at = ioc.last_seen_at
+        if incoming_last_seen and existing_last_seen and incoming_last_seen > existing_last_seen:
+            existing.last_seen_at = incoming_last_seen
             changed = True
 
         # Merge tags
