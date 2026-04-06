@@ -75,7 +75,7 @@ class ThreatFoxConnector:
     def __init__(self) -> None:
         headers = {"Content-Type": "application/json"}
         if settings.THREATFOX_API_KEY:
-            headers["API-KEY"] = settings.THREATFOX_API_KEY
+            headers["Auth-Key"] = settings.THREATFOX_API_KEY
 
         self._client = httpx.AsyncClient(
             base_url=self.BASE_URL,

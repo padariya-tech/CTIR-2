@@ -17,7 +17,7 @@ from typing import Any
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-
+from sqlalchemy.exc import IntegrityError
 from app.core.logging import get_logger
 from app.models.models import Ioc, IocType
 from app.schemas.schemas import NormalizedIoc
@@ -60,7 +60,7 @@ class DeduplicationEngine:
         return row
 
     async def upsert(
-        self, ioc: NormalizedIoc
+    self, ioc: NormalizedIoc
     ) -> tuple[str, Ioc]:
         """
         Insert or update an IOC.
@@ -68,14 +68,14 @@ class DeduplicationEngine:
         """
         ioc_hash = compute_ioc_hash(ioc.ioc_type, ioc.ioc_value)
 
-        # Lookup existing row
+        # ── First check (fast path) ───────────────────────────────
         result = await self._session.execute(
             select(Ioc).where(Ioc.ioc_hash == ioc_hash)
         )
         existing: Ioc | None = result.scalar_one_or_none()
 
         if existing is None:
-            # ── New IOC ───────────────────────────────────────────────
+            # ── Try insert (may race) ─────────────────────────────
             type_id = await self._get_type_id(ioc.ioc_type)
             new_ioc = Ioc(
                 ioc_value=ioc.ioc_value,
@@ -101,24 +101,36 @@ class DeduplicationEngine:
                 expires_at=ioc.expires_at,
                 is_active=True,
             )
-            self._session.add(new_ioc)
-            return "new", new_ioc
 
-        # ── Duplicate detected ────────────────────────────────────────
+            try:
+                self._session.add(new_ioc)
+                await self._session.flush()   # force insert
+                return "new", new_ioc
+
+            except IntegrityError:
+                # Another process inserted same IOC → recover
+                await self._session.rollback()
+
+                result = await self._session.execute(
+                    select(Ioc).where(Ioc.ioc_hash == ioc_hash)
+                )
+                existing = result.scalar_one()
+
+        # ── Duplicate detected / recovered ────────────────────────
         changed = False
 
-        # Conflict resolution: prefer higher confidence
+        # Higher confidence wins
         if ioc.confidence > existing.confidence:
             existing.confidence = ioc.confidence
             changed = True
 
-        # Conflict resolution: prefer more severe rating
+        # More severe wins
         new_severity = _merge_severity(existing.severity, ioc.severity)
         if new_severity != existing.severity:
             existing.severity = new_severity
             changed = True
 
-        # Always refresh last_seen
+        # Update last_seen
         if ioc.last_seen_at > existing.last_seen_at:
             existing.last_seen_at = ioc.last_seen_at
             changed = True
@@ -150,6 +162,7 @@ class DeduplicationEngine:
 
         status = "updated" if changed else "duplicate"
         logger.debug("dedup_result", status=status, ioc_hash=ioc_hash[:16])
+
         return status, existing
 
     async def bulk_upsert(

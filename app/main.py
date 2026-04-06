@@ -5,14 +5,15 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from app.core.config import get_settings
+from app.core.exceptions import CTIRBaseException
 from app.core.logging import get_logger, setup_logging
 from app.core.scheduler import start_scheduler, stop_scheduler
+from app.core.security import RequestIDMiddleware
 from app.api.routes import iocs, ingestion, system
 
 setup_logging()
 logger = get_logger(__name__)
 settings = get_settings()
-
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -35,15 +36,30 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# ── CORS ──────────────────────────────────────────────────────────────────────
+# ── Middleware ────────────────────────────────────────────────────────────────
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
+app.add_middleware(RequestIDMiddleware)
 
-# ── Global error handler ──────────────────────────────────────────────────────
+# ── Domain exception handler ──────────────────────────────────────────────────
+@app.exception_handler(CTIRBaseException)
+async def ctir_exception_handler(request: Request, exc: CTIRBaseException):
+    logger.warning(
+        "ctir_domain_exception",
+        path=request.url.path,
+        error=exc.detail,
+        status_code=exc.status_code,
+    )
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={"detail": exc.detail},
+    )
+
+# ── Global fallback handler ───────────────────────────────────────────────────
 @app.exception_handler(Exception)
 async def unhandled_exception_handler(request: Request, exc: Exception):
     logger.error(
@@ -55,7 +71,7 @@ async def unhandled_exception_handler(request: Request, exc: Exception):
     )
     return JSONResponse(
         status_code=500,
-        content={"detail": "Internal server error", "error": str(exc)},
+        content={"detail": "Internal server error"},
     )
 
 # ── Routers ───────────────────────────────────────────────────────────────────
