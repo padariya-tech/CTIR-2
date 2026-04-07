@@ -3,15 +3,16 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
+    # Configure loading from .env file and ignore extra env vars not defined here
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
     # Database
     DATABASE_URL: str = (
         "mysql+aiomysql://ctir_user:ctir_pass@localhost:3306/ctir_db"
     )
-    DB_POOL_SIZE: int = 10
-    DB_MAX_OVERFLOW: int = 20
-    DB_POOL_RECYCLE: int = 3600
+    DB_POOL_SIZE: int = 10  # number of connections to keep in the pool
+    DB_MAX_OVERFLOW: int = 20 # max number of connections to create beyond the pool_size
+    DB_POOL_RECYCLE: int = 3600 # recycle connections after this many seconds (to prevent stale connections)
 
     # API
     API_SECRET_KEY: str = "dev-secret-key"

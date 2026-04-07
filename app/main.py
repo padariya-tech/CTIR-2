@@ -10,6 +10,7 @@ from app.core.logging import get_logger, setup_logging
 from app.core.scheduler import start_scheduler, stop_scheduler
 from app.core.security import RequestIDMiddleware
 from app.api.routes import iocs, ingestion, system
+from app.adapters.routes.export import router as adapter_router
 
 setup_logging()
 logger = get_logger(__name__)
@@ -78,7 +79,7 @@ async def unhandled_exception_handler(request: Request, exc: Exception):
 app.include_router(system.router)
 app.include_router(iocs.router, prefix="/api/v1")
 app.include_router(ingestion.router, prefix="/api/v1")
-
+app.include_router(adapter_router, prefix="/api/v1")
 
 @app.get("/", include_in_schema=False)
 async def root():

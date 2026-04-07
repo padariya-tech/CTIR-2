@@ -80,9 +80,9 @@ async def run_ingestion(
         settings = get_settings()
 
         # ── Step 1: Fetch ─────────────────────────────────────────────────────
-        connector = get_connector(feed_name) 
+        connector = get_connector(feed_name)  # Resolve the appropriate feed connector from the registry based on feed_name
         try:
-            async with connector as conn:
+            async with connector as conn: #
                 raw_records, fetch_metrics = await conn.fetch_recent(
                     days=settings.THREATFOX_QUERY_DAYS
                 )

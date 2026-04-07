@@ -768,3 +768,136 @@
 {"event": "scheduler_stopped", "level": "info", "logger": "app.core.scheduler", "timestamp": "2026-04-06T11:10:26.059590Z"}
 {"event": "ctir_shutdown", "level": "info", "logger": "app.main", "timestamp": "2026-04-06T11:10:26.059768Z"}
 {"event": "Scheduler has been shut down", "level": "info", "logger": "apscheduler.scheduler", "timestamp": "2026-04-06T11:10:26.060049Z"}
+{"version": "1.0.0", "event": "ctir_startup", "level": "info", "logger": "app.main", "timestamp": "2026-04-07T10:05:43.768077Z"}
+{"event": "Adding job tentatively -- it will be properly scheduled when the scheduler starts", "level": "info", "logger": "apscheduler.scheduler", "timestamp": "2026-04-07T10:05:43.768425Z"}
+{"event": "Added job \"_scheduled_ingestion\" to job store \"default\"", "level": "info", "logger": "apscheduler.scheduler", "timestamp": "2026-04-07T10:05:43.768984Z"}
+{"event": "Scheduler started", "level": "info", "logger": "apscheduler.scheduler", "timestamp": "2026-04-07T10:05:43.769083Z"}
+{"interval_minutes": 60, "event": "scheduler_started", "level": "info", "logger": "app.core.scheduler", "timestamp": "2026-04-07T10:05:43.769156Z"}
+{"version": "1.0.0", "event": "ctir_startup", "level": "info", "logger": "app.main", "timestamp": "2026-04-07T10:05:43.770502Z"}
+{"event": "Adding job tentatively -- it will be properly scheduled when the scheduler starts", "level": "info", "logger": "apscheduler.scheduler", "timestamp": "2026-04-07T10:05:43.770835Z"}
+{"event": "Added job \"_scheduled_ingestion\" to job store \"default\"", "level": "info", "logger": "apscheduler.scheduler", "timestamp": "2026-04-07T10:05:43.771361Z"}
+{"event": "Scheduler started", "level": "info", "logger": "apscheduler.scheduler", "timestamp": "2026-04-07T10:05:43.771461Z"}
+{"interval_minutes": 60, "event": "scheduler_started", "level": "info", "logger": "app.core.scheduler", "timestamp": "2026-04-07T10:05:43.771526Z"}
+{"request_id": "1e9679d5-59a3-4e82-8c99-75e47ed62890", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 13, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:05:47.863493Z"}
+{"request_id": "51b9e54e-5b32-4e1d-82eb-68490c9b91a7", "method": "GET", "path": "/stats", "status_code": 200, "latency_ms": 31, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:06:00.911729Z"}
+{"request_id": "f9db93ec-9622-4137-9623-2fbd5fe9a099", "method": "GET", "path": "/stats", "status_code": 200, "latency_ms": 5, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:06:02.218661Z"}
+{"request_id": "be72ea6e-0b20-42d1-95d4-886fb93c3316", "method": "GET", "path": "/stats", "status_code": 200, "latency_ms": 4, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:06:02.817362Z"}
+{"request_id": "ba34b7e4-9ce3-4a4a-8891-c9bf77d2bd87", "method": "GET", "path": "/stats", "status_code": 200, "latency_ms": 4, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:06:03.160358Z"}
+{"feed_name": "ThreatFox", "event": "feed_registered", "level": "info", "logger": "app.services.feed_registry", "timestamp": "2026-04-07T10:06:15.560306Z"}
+{"request_id": "c5f0eb98-8140-4129-95ee-72732b8facac", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:06:17.904983Z"}
+{"request_id": "62b7e368-c625-4d5d-a6af-25b7262eb40b", "method": "POST", "path": "/api/v1/ingestion/trigger", "status_code": 202, "latency_ms": 10002, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:06:25.560936Z"}
+{"job_id": 10, "triggered_by": "manual", "event": "ingestion_job_created", "level": "info", "logger": "app.db.job_repository", "timestamp": "2026-04-07T10:06:25.577045Z"}
+{"job_id": 10, "feed": "ThreatFox", "trigger": "manual", "event": "ingestion_started", "level": "info", "logger": "app.services.ingestion_service", "timestamp": "2026-04-07T10:06:25.667338Z"}
+{"event": "HTTP Request: POST https://threatfox-api.abuse.ch/api/v1/ \"HTTP/1.1 200 OK\"", "level": "info", "logger": "httpx", "timestamp": "2026-04-07T10:06:29.102381Z"}
+{"records_fetched": 557, "latency_ms": 4892, "query_status": "ok", "event": "threatfox_fetch_complete", "level": "info", "logger": "app.services.connectors.threatfox", "timestamp": "2026-04-07T10:06:30.568115Z"}
+{"job_id": 10, "records_fetched": 557, "latency_ms": 4892, "query_status": "ok", "event": "step_fetch_done", "level": "info", "logger": "app.services.ingestion_service", "timestamp": "2026-04-07T10:06:30.568409Z"}
+{"total": 557, "valid": 557, "invalid": 0, "event": "parse_complete", "level": "info", "logger": "app.services.parsers.parser", "timestamp": "2026-04-07T10:06:30.574854Z"}
+{"job_id": 10, "valid": 557, "invalid": 0, "event": "step_parse_done", "level": "info", "logger": "app.services.ingestion_service", "timestamp": "2026-04-07T10:06:30.574997Z"}
+{"new": 535, "updated": 22, "duplicate": 0, "event": "dedup_complete", "level": "info", "logger": "app.services.deduplication.engine", "timestamp": "2026-04-07T10:06:31.600714Z"}
+{"job_id": 10, "new": 535, "updated": 22, "duplicate": 0, "event": "step_dedup_done", "level": "info", "logger": "app.services.ingestion_service", "timestamp": "2026-04-07T10:06:31.621360Z"}
+{"job_id": 10, "status": "success", "latency_ms": 6060, "event": "ingestion_job_completed", "level": "info", "logger": "app.db.job_repository", "timestamp": "2026-04-07T10:06:31.625987Z"}
+{"job_id": 10, "status": "success", "latency_ms": 6060, "event": "ingestion_complete", "level": "info", "logger": "app.services.ingestion_service", "timestamp": "2026-04-07T10:06:31.628166Z"}
+{"request_id": "220fcc12-1747-4d66-b3f7-4ebad6bcba5c", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:06:47.950043Z"}
+{"request_id": "3ba13931-855b-42b0-bb32-10751c6fff2a", "method": "GET", "path": "/stats", "status_code": 200, "latency_ms": 5, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:06:55.321878Z"}
+{"request_id": "59d6b605-e14f-4bea-a2ec-3128e719a033", "method": "GET", "path": "/stats", "status_code": 200, "latency_ms": 5, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:06:57.299568Z"}
+{"request_id": "9a809215-7c22-4e51-9991-3c4678c02e2e", "method": "GET", "path": "/stats", "status_code": 200, "latency_ms": 5, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:06:57.843663Z"}
+{"request_id": "386330c8-848f-4b3e-afda-2c6a1ed8880f", "method": "GET", "path": "/stats", "status_code": 200, "latency_ms": 4, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:06:58.066280Z"}
+{"request_id": "2b6d6d87-dd3d-4184-a7b4-d76775153a26", "method": "GET", "path": "/stats", "status_code": 200, "latency_ms": 4, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:06:58.283162Z"}
+{"request_id": "f71ad268-8397-4bb1-9420-230f492c6236", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:07:17.997360Z"}
+{"request_id": "52fcdaac-fd63-4b52-922b-bb4dead04a70", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:07:48.045537Z"}
+{"request_id": "f14f7448-a323-4e4c-b3f3-d1a81c465591", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:08:18.100744Z"}
+{"request_id": "7699849b-758f-4ebf-adac-c3ff239b59eb", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:08:48.147578Z"}
+{"request_id": "1a5e6bd4-2240-4fe5-aa91-956297eba16d", "method": "GET", "path": "/api/v1/ingestion/jobs", "status_code": 200, "latency_ms": 2, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:09:00.089575Z"}
+{"request_id": "c4896727-5573-435f-b415-e85aba21843c", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:09:18.191515Z"}
+{"event": "scheduler_stopped", "level": "info", "logger": "app.core.scheduler", "timestamp": "2026-04-07T10:09:29.897941Z"}
+{"event": "ctir_shutdown", "level": "info", "logger": "app.main", "timestamp": "2026-04-07T10:09:29.898094Z"}
+{"event": "Scheduler has been shut down", "level": "info", "logger": "apscheduler.scheduler", "timestamp": "2026-04-07T10:09:29.898290Z"}
+{"event": "scheduler_stopped", "level": "info", "logger": "app.core.scheduler", "timestamp": "2026-04-07T10:09:30.094224Z"}
+{"event": "ctir_shutdown", "level": "info", "logger": "app.main", "timestamp": "2026-04-07T10:09:30.094369Z"}
+{"event": "Scheduler has been shut down", "level": "info", "logger": "apscheduler.scheduler", "timestamp": "2026-04-07T10:09:30.094558Z"}
+{"version": "1.0.0", "event": "ctir_startup", "level": "info", "logger": "app.main", "timestamp": "2026-04-07T10:12:20.871615Z"}
+{"version": "1.0.0", "event": "ctir_startup", "level": "info", "logger": "app.main", "timestamp": "2026-04-07T10:12:20.871647Z"}
+{"event": "Adding job tentatively -- it will be properly scheduled when the scheduler starts", "level": "info", "logger": "apscheduler.scheduler", "timestamp": "2026-04-07T10:12:20.871976Z"}
+{"event": "Adding job tentatively -- it will be properly scheduled when the scheduler starts", "level": "info", "logger": "apscheduler.scheduler", "timestamp": "2026-04-07T10:12:20.871978Z"}
+{"event": "Added job \"_scheduled_ingestion\" to job store \"default\"", "level": "info", "logger": "apscheduler.scheduler", "timestamp": "2026-04-07T10:12:20.872583Z"}
+{"event": "Added job \"_scheduled_ingestion\" to job store \"default\"", "level": "info", "logger": "apscheduler.scheduler", "timestamp": "2026-04-07T10:12:20.872586Z"}
+{"event": "Scheduler started", "level": "info", "logger": "apscheduler.scheduler", "timestamp": "2026-04-07T10:12:20.872683Z"}
+{"event": "Scheduler started", "level": "info", "logger": "apscheduler.scheduler", "timestamp": "2026-04-07T10:12:20.872683Z"}
+{"interval_minutes": 60, "event": "scheduler_started", "level": "info", "logger": "app.core.scheduler", "timestamp": "2026-04-07T10:12:20.872752Z"}
+{"interval_minutes": 60, "event": "scheduler_started", "level": "info", "logger": "app.core.scheduler", "timestamp": "2026-04-07T10:12:20.872751Z"}
+{"request_id": "fdd75d67-8479-48cf-8817-354bead21128", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 13, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:12:24.964060Z"}
+{"request_id": "490dab15-bcc0-4f49-8ad2-7f91eb58864d", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:12:55.010674Z"}
+{"request_id": "51389f73-5c80-4322-8c90-e8a3b738ad81", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:13:25.061800Z"}
+{"request_id": "dd488cc7-5686-4d66-9cad-5ed8b080ce49", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:13:55.108664Z"}
+{"request_id": "5f6357cc-7c03-4511-b007-0993a4b3fad3", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 5, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:14:25.159654Z"}
+{"request_id": "2bd4b5a8-4bf2-4fb5-a0fc-d74ff0aa514b", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:14:55.209711Z"}
+{"request_id": "4a2997a3-952d-42fe-baef-7156cab347df", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:15:25.258689Z"}
+{"request_id": "7535f750-b5c3-4119-a4ac-0ea0d02d1234", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:15:55.309479Z"}
+{"request_id": "5c01aff1-6096-4c95-a247-b0ecfeaa058a", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:16:25.351846Z"}
+{"request_id": "d348454c-f924-49f0-8ded-d2d0bcdc28ae", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:16:55.396765Z"}
+{"request_id": "d26ebfd5-6f3c-461a-ad9a-a088c3da47ec", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:17:25.444521Z"}
+{"request_id": "bebad556-3d93-4303-9041-28faa4fb16b3", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:17:55.496580Z"}
+{"request_id": "9b524339-2c37-445e-9db6-e11194be61fe", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:18:25.543500Z"}
+{"request_id": "268682e1-8988-4cb4-a728-d9252d28ada1", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:18:55.588314Z"}
+{"request_id": "53c43bf0-3b1c-40de-adc7-04edf7edfeff", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:19:25.635975Z"}
+{"request_id": "141dee66-1952-4362-b3b0-0e785cdfb56a", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:19:55.677769Z"}
+{"request_id": "a6c00110-fb2f-4180-be09-403d453b0d7f", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:20:25.725361Z"}
+{"request_id": "f4acbb6d-cf84-4c3a-a386-135f145e81d8", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:20:55.768387Z"}
+{"request_id": "c0fd3bf7-9a4e-469f-80fb-b47d7e56459e", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:21:25.811231Z"}
+{"request_id": "cf9fbee2-8f76-4247-abf5-ceba84d0202b", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:21:55.859162Z"}
+{"request_id": "530d0e55-9564-4586-81e7-5c7525ab9c00", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:22:25.915404Z"}
+{"request_id": "b463e494-4f16-442a-a4f6-2eb6275bb0e3", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:22:55.962823Z"}
+{"request_id": "2ed040fe-ef2d-40a4-a523-cebab3428005", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:23:26.017669Z"}
+{"request_id": "ee8902d0-57f8-4549-bbe8-4a321dec987f", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T10:23:56.067803Z"}
+{"event": "scheduler_stopped", "level": "info", "logger": "app.core.scheduler", "timestamp": "2026-04-07T10:23:59.984203Z"}
+{"event": "ctir_shutdown", "level": "info", "logger": "app.main", "timestamp": "2026-04-07T10:23:59.984353Z"}
+{"event": "Scheduler has been shut down", "level": "info", "logger": "apscheduler.scheduler", "timestamp": "2026-04-07T10:23:59.984544Z"}
+{"event": "scheduler_stopped", "level": "info", "logger": "app.core.scheduler", "timestamp": "2026-04-07T10:24:00.105501Z"}
+{"event": "ctir_shutdown", "level": "info", "logger": "app.main", "timestamp": "2026-04-07T10:24:00.105639Z"}
+{"event": "Scheduler has been shut down", "level": "info", "logger": "apscheduler.scheduler", "timestamp": "2026-04-07T10:24:00.105812Z"}
+{"version": "1.0.0", "event": "ctir_startup", "level": "info", "logger": "app.main", "timestamp": "2026-04-07T11:05:24.815637Z"}
+{"event": "Adding job tentatively -- it will be properly scheduled when the scheduler starts", "level": "info", "logger": "apscheduler.scheduler", "timestamp": "2026-04-07T11:05:24.815975Z"}
+{"event": "Added job \"_scheduled_ingestion\" to job store \"default\"", "level": "info", "logger": "apscheduler.scheduler", "timestamp": "2026-04-07T11:05:24.816511Z"}
+{"event": "Scheduler started", "level": "info", "logger": "apscheduler.scheduler", "timestamp": "2026-04-07T11:05:24.816611Z"}
+{"interval_minutes": 60, "event": "scheduler_started", "level": "info", "logger": "app.core.scheduler", "timestamp": "2026-04-07T11:05:24.816674Z"}
+{"version": "1.0.0", "event": "ctir_startup", "level": "info", "logger": "app.main", "timestamp": "2026-04-07T11:05:24.819405Z"}
+{"event": "Adding job tentatively -- it will be properly scheduled when the scheduler starts", "level": "info", "logger": "apscheduler.scheduler", "timestamp": "2026-04-07T11:05:24.819733Z"}
+{"event": "Added job \"_scheduled_ingestion\" to job store \"default\"", "level": "info", "logger": "apscheduler.scheduler", "timestamp": "2026-04-07T11:05:24.820251Z"}
+{"event": "Scheduler started", "level": "info", "logger": "apscheduler.scheduler", "timestamp": "2026-04-07T11:05:24.820350Z"}
+{"interval_minutes": 60, "event": "scheduler_started", "level": "info", "logger": "app.core.scheduler", "timestamp": "2026-04-07T11:05:24.820413Z"}
+{"request_id": "c743dda8-c362-4133-af9f-453cac5ef690", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 13, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T11:05:28.776116Z"}
+{"request_id": "e5713289-8d5d-445f-9bcb-f0fc85cf42cd", "method": "GET", "path": "/docs", "status_code": 200, "latency_ms": 0, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T11:05:48.761685Z"}
+{"request_id": "3e7b13e2-8ebc-4752-b726-9344e5f8a18d", "method": "GET", "path": "/openapi.json", "status_code": 200, "latency_ms": 43, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T11:05:49.091752Z"}
+{"request_id": "58d97404-3934-4f06-949e-6102ba7c7ca3", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T11:05:58.820494Z"}
+{"format": "json", "total": 918, "returned": 200, "filter": {"min_confidence": 0, "max_confidence": 100, "is_active": true, "page": 1, "page_size": 200}, "event": "adapter_export", "level": "info", "logger": "app.adapters.adapter_service", "timestamp": "2026-04-07T11:06:24.181997Z"}
+{"ioc_count": 200, "event": "json_serialized", "level": "info", "logger": "app.adapters.formats.json_adapter", "timestamp": "2026-04-07T11:06:24.183396Z"}
+{"request_id": "97644a17-0cf9-413f-a5f4-64f4ac90bc41", "method": "GET", "path": "/api/v1/export/json", "status_code": 200, "latency_ms": 43, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T11:06:24.184466Z"}
+{"request_id": "e7936772-4a6d-4bf2-b31f-0d9c5364bb56", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T11:06:28.867502Z"}
+{"format": "stix", "total": 918, "returned": 200, "filter": {"min_confidence": 0, "max_confidence": 100, "is_active": true, "page": 1, "page_size": 200}, "event": "adapter_export", "level": "info", "logger": "app.adapters.adapter_service", "timestamp": "2026-04-07T11:06:44.348259Z"}
+{"object_count": 417, "ioc_count": 200, "event": "stix_serialized", "level": "info", "logger": "app.adapters.formats.stix_adapter", "timestamp": "2026-04-07T11:06:44.354986Z"}
+{"request_id": "bafd720b-89ec-43c7-8c48-25c2fa26db1d", "method": "GET", "path": "/api/v1/export/stix", "status_code": 200, "latency_ms": 37, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T11:06:44.357930Z"}
+{"request_id": "76d46803-82cd-4147-85d8-e7dd3c11c284", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T11:06:58.914599Z"}
+{"request_id": "0cf5fbd6-84f5-46fd-a626-ee4a1958d076", "method": "GET", "path": "/api/v1/export/formats", "status_code": 200, "latency_ms": 0, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T11:07:18.095901Z"}
+{"request_id": "0f47f1c5-cac8-4b92-b7d3-6876521e210f", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T11:07:28.957608Z"}
+{"format": "misp", "total": 918, "returned": 200, "filter": {"min_confidence": 0, "max_confidence": 100, "is_active": true, "page": 1, "page_size": 200}, "event": "adapter_export", "level": "info", "logger": "app.adapters.adapter_service", "timestamp": "2026-04-07T11:07:39.538651Z"}
+{"ioc_count": 200, "families": 16, "event": "misp_serialized", "level": "info", "logger": "app.adapters.formats.misp_adapter", "timestamp": "2026-04-07T11:07:39.542031Z"}
+{"request_id": "b5eb8e7c-d755-4d67-ab98-60838d872198", "method": "GET", "path": "/api/v1/export/misp", "status_code": 200, "latency_ms": 16, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T11:07:39.544055Z"}
+{"request_id": "bbd6a2c5-584e-4047-a744-ad3c9b4bf6f4", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T11:07:59.002788Z"}
+{"format": "csv", "total": 918, "event": "adapter_bulk_export", "level": "info", "logger": "app.adapters.adapter_service", "timestamp": "2026-04-07T11:08:03.378373Z"}
+{"ioc_count": 918, "delimiter": "','", "event": "csv_serialized", "level": "info", "logger": "app.adapters.formats.csv_adapter", "timestamp": "2026-04-07T11:08:03.384808Z"}
+{"request_id": "ba06fbea-a97e-4bcd-bb29-7cc4b67078a0", "method": "GET", "path": "/api/v1/export/csv", "status_code": 200, "latency_ms": 40, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T11:08:03.386148Z"}
+{"format": "txt", "total": 918, "event": "adapter_bulk_export", "level": "info", "logger": "app.adapters.adapter_service", "timestamp": "2026-04-07T11:08:26.716309Z"}
+{"ioc_count": 918, "event": "txt_serialized", "level": "info", "logger": "app.adapters.formats.txt_adapter", "timestamp": "2026-04-07T11:08:26.716837Z"}
+{"request_id": "9e34437c-2a33-48b7-83e0-3e1a7b4af660", "method": "GET", "path": "/api/v1/export/txt", "status_code": 200, "latency_ms": 31, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T11:08:26.718134Z"}
+{"request_id": "a7bce18d-b932-4c56-adc4-fec5bdf6dea8", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T11:08:29.043578Z"}
+{"format": "iocjson_v1", "total": 918, "returned": 200, "filter": {"min_confidence": 0, "max_confidence": 100, "is_active": true, "page": 1, "page_size": 200}, "event": "adapter_export", "level": "info", "logger": "app.adapters.adapter_service", "timestamp": "2026-04-07T11:08:54.982809Z"}
+{"ioc_count": 200, "event": "iocjson_v1_serialized", "level": "info", "logger": "app.adapters.formats.iocjson_adapter", "timestamp": "2026-04-07T11:08:54.984290Z"}
+{"request_id": "ce8b8ee1-0184-4e53-904f-9bef26651a29", "method": "GET", "path": "/api/v1/export/iocjson/v1", "status_code": 200, "latency_ms": 12, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T11:08:54.985803Z"}
+{"request_id": "6c0b83db-7dc8-4d62-8bdd-ddd231428d5f", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T11:08:59.087528Z"}
+{"request_id": "f2b1bc37-e2dd-40f9-802f-94797900883e", "method": "GET", "path": "/health", "status_code": 200, "latency_ms": 1, "event": "http_request", "level": "info", "logger": "app.core.security", "timestamp": "2026-04-07T11:09:29.129348Z"}
+{"event": "scheduler_stopped", "level": "info", "logger": "app.core.scheduler", "timestamp": "2026-04-07T11:09:33.092462Z"}
+{"event": "ctir_shutdown", "level": "info", "logger": "app.main", "timestamp": "2026-04-07T11:09:33.092603Z"}
+{"event": "Scheduler has been shut down", "level": "info", "logger": "apscheduler.scheduler", "timestamp": "2026-04-07T11:09:33.092791Z"}
+{"event": "scheduler_stopped", "level": "info", "logger": "app.core.scheduler", "timestamp": "2026-04-07T11:09:33.204550Z"}
+{"event": "ctir_shutdown", "level": "info", "logger": "app.main", "timestamp": "2026-04-07T11:09:33.204688Z"}
+{"event": "Scheduler has been shut down", "level": "info", "logger": "apscheduler.scheduler", "timestamp": "2026-04-07T11:09:33.204886Z"}

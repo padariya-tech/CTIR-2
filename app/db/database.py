@@ -14,9 +14,9 @@ from app.core.config import get_settings
 from app.core.logging import get_logger
 
 logger = get_logger(__name__)
-settings = get_settings()
+settings = get_settings()  # Load settings once at module level so we don't read env vars repeatedly when creating DB sessions
 
-engine: AsyncEngine = create_async_engine(
+engine: AsyncEngine = create_async_engine( # create the async engine with connection pooling parameters from settings
     settings.DATABASE_URL,
     pool_size=settings.DB_POOL_SIZE,
     max_overflow=settings.DB_MAX_OVERFLOW,
@@ -25,7 +25,7 @@ engine: AsyncEngine = create_async_engine(
     echo=False,
 )
 
-AsyncSessionLocal = async_sessionmaker(
+AsyncSessionLocal = async_sessionmaker(  # create a session factory that will generate AsyncSession instances when called. It uses the engine we just created and sets some defaults for session behavior.
     bind=engine,
     class_=AsyncSession,
     expire_on_commit=False,
@@ -53,7 +53,7 @@ async def get_db() -> AsyncGenerator[AsyncSession, None]:
 
 @asynccontextmanager
 async def get_db_context() -> AsyncGenerator[AsyncSession, None]: 
-    """Use inside services / tasks that don't go through FastAPI's DI.This function gives me a DB session and handles cleanup automatically."""
+    """Use inside services / tasks that don't go through FastAPI's DI(dependency injection).This function gives me a DB session and handles cleanup automatically."""
     # AsyncSessionLocal() → creates session
     async with AsyncSessionLocal() as session:
         try:
