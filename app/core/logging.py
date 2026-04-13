@@ -13,10 +13,10 @@ def setup_logging() -> None:
 
     Path(settings.LOG_FILE).parent.mkdir(parents=True, exist_ok=True)
 
-    shared_processors = [
-        structlog.contextvars.merge_contextvars,
-        structlog.stdlib.add_log_level,
-        structlog.stdlib.add_logger_name,
+    shared_processors = [  # functions that run for all loggers
+        structlog.contextvars.merge_contextvars, # add contextvars to log entries (e.g. request_id)
+        structlog.stdlib.add_log_level, # add log level to log entries
+        structlog.stdlib.add_logger_name, # add logger name to log entries
         structlog.processors.TimeStamper(fmt="iso"),
         structlog.processors.StackInfoRenderer(),
     ]

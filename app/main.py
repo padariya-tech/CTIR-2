@@ -47,7 +47,7 @@ app.add_middleware(
 app.add_middleware(RequestIDMiddleware)
 
 # ── Domain exception handler ──────────────────────────────────────────────────
-@app.exception_handler(CTIRBaseException)
+@app.exception_handler(CTIRBaseException) # catch all CTIR domain exceptions and return structured JSON
 async def ctir_exception_handler(request: Request, exc: CTIRBaseException):
     logger.warning(
         "ctir_domain_exception",
@@ -61,7 +61,7 @@ async def ctir_exception_handler(request: Request, exc: CTIRBaseException):
     )
 
 # ── Global fallback handler ───────────────────────────────────────────────────
-@app.exception_handler(Exception)
+@app.exception_handler(Exception) # handle any uncaught exceptions to prevent 500s without logs
 async def unhandled_exception_handler(request: Request, exc: Exception):
     logger.error(
         "unhandled_exception",

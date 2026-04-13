@@ -10,7 +10,7 @@ from app.schemas.schemas import IngestionJobResponse, IngestionTriggerResponse
 
 router = APIRouter(prefix="/ingestion", tags=["Ingestion"])
 
-
+# Give a fast API response while running a long process in background
 @router.post("/trigger", response_model=IngestionTriggerResponse, status_code=202)
 async def trigger_ingestion(background_tasks: BackgroundTasks):
     """Manually trigger a ThreatFox ingestion cycle (async, returns immediately)."""
@@ -48,6 +48,9 @@ async def list_jobs(limit: int = Query(20, ge=1, le=100), db: AsyncSession = Dep
     repo = IngestionJobRepository(db)
     jobs = await repo.list_recent(limit=limit)
     return [IngestionJobResponse.model_validate(j) for j in jobs]
+# model_validate takes raw data (dict / ORM object)
+# converts into model
+# validates fields
 
 
 @router.get("/jobs/{job_id}", response_model=IngestionJobResponse)

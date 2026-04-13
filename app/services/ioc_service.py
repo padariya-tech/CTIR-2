@@ -1,7 +1,7 @@
 """
 CTIR — IOC Service
 Business logic for IOC retrieval, deactivation, expiry management.
-Routes depend on this; this depends on IocRepository.
+Routes depend on this; this depends on IocRepository(DB).
 """
 
 from typing import Optional
